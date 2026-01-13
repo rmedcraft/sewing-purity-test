@@ -3,7 +3,7 @@ export default function Checkbox(props: any) {
 
     return (
         <div className="flex flex-row gap-2 align-top justify-start">
-            <p className="select-none">{`${index + 1}.`.padEnd(4, " ")}</p>
+            <p className="select-none text-end">{`${index + 1}.`.padEnd(4, " ")}</p>
             <input id={`check${index}`} type="checkbox" className="cursor-pointer" onChange={(e: any) => {
                 if (e.target.checked) {
                     setTotal((total: number) => total + 1)
