@@ -47,7 +47,7 @@ const questions = [
     "draped a sewing pattern",
     "designed a sewing pattern in 3D draping software",
     "designed a textile / fabric",
-    "had fabric you’ve designed printed / produced",
+    "had fabric you've designed printed / produced",
     "used horsehair braid",
     "know 3 hand stitches",
     "know over 3 hand stitches",
@@ -93,19 +93,44 @@ const questions = [
     "made a tear away garment",
     "sewn a non fabric material under a machine(ie cardboard, plastic bags, etc)",
     "sold your sewn goods online or in person",
+    "sewn for a competition",
+    "eased something",
+    "hung a circle skirt overnight before hemming ",
+    "stay stitched something",
+    "used a ballpoint needle on stretchy fabric as god intended ",
+    "broken a needle ",
+    "sewn without taking the pins out when going under the machine",
+    "sewn something without pins",
+    "wear safety glasses when machine sewing",
+    "couched something",
 ]
 
 function App() {
     const [total, setTotal] = useState<number>(0)
 
+    const [finished, setFinished] = useState<boolean>(false)
+
     return (
-        <div className="container max-w-xl mt-2 mx-auto">
+        <div className="container max-w-xl my-2 mx-auto">
             <img src={Logo} />
             <p className='text-center mt-5'>The Sewing Purity Test is a voluntary self-assessment created by Bell Hansen and Rowan Medcraft. It is an opportunity to reflect on the evolution of your interactions with sewing and sewing related material</p>
             <p className='text-center my-5 font-bold'>Caution: this is not a bucket list. Completion of all items on this test will likely result in death</p>
-            {questions.map((question, index) => {
-                return <Checkbox question={question} key={index} index={index} setTotal={setTotal} />
-            })}
+
+            {/* if the test is in progress */}
+            {!finished && <>
+                {questions.map((question, index) => {
+                    return <Checkbox question={question} key={index} index={index} setTotal={setTotal} />
+                })}
+                <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white" onClick={() => setFinished((finished) => !finished)}>Submit your score</button>
+            </>}
+
+            {/* if the user submitted the test */}
+            {finished &&
+                <>
+                    <h1 className="text-center text-2xl mt-5">Your final score:</h1>
+                    <h1 className="text-center text-6xl my-2">{total}</h1>
+                </>
+            }
         </div>
     )
 }
