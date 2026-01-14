@@ -2,6 +2,7 @@ import { useState } from "react"
 import Checkbox from "./Checkbox"
 import Logo from "./assets/sewing-purity-test-logo.png"
 import Needle from "./assets/needle-icon.png"
+import { Button } from "./Button"
 
 const questions = [
     "Threaded a needle",
@@ -111,9 +112,9 @@ function App() {
 
     const [finished, setFinished] = useState<boolean>(false)
 
-    // this data type doesnt matter at all. it just triggers a useEffect in each checkbox component
-
     const [checked, setChecked] = useState<HTMLInputElement[]>([])
+
+    const [shareText, setShareText] = useState<string>("Share Results")
 
     function clearChecks() {
         checked.forEach((box) => {
@@ -137,8 +138,8 @@ function App() {
                         return <Checkbox question={question} key={index} index={index} setTotal={setTotal} setChecked={setChecked} />
                     })}
                     <div className="flex flex-row gap-4">
-                        <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white" onClick={() => setFinished(true)}>Submit your score</button>
-                        <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white" onClick={clearChecks}>Clear all boxes</button>
+                        <Button onClick={() => setFinished(true)}>Submit your score</Button>
+                        <Button onClick={clearChecks}>Clear all boxes</Button>
                     </div>
                 </>}
 
@@ -147,12 +148,22 @@ function App() {
                     <>
                         <h1 className="text-center text-2xl mt-5">Your final score:</h1>
                         <h1 className="text-center text-6xl my-2">{100 - total}</h1>
-                        <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white"
-                            onClick={() => {
-                                clearChecks()
-                                setFinished(false)
-                            }}
-                        >Take Again</button>
+                        <div className="flex flex-row gap-4 mx-auto">
+                            <Button
+                                onClick={() => {
+                                    clearChecks()
+                                    setFinished(false)
+                                }}
+                            >Take Again</Button>
+
+                            <Button onClick={() => {
+                                navigator.clipboard.writeText(`I scored a ${100 - total} on the Sewing Purity Test! ${window.location.origin}`)
+                                setShareText("Copied to clipboard")
+                                setTimeout(() => {
+                                    setShareText("Share Results")
+                                }, 3000)
+                            }}>{shareText}</Button>
+                        </div>
                     </>
                 }
             </div>
