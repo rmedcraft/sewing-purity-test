@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Checkbox from "./Checkbox"
 import Logo from "./assets/sewing-purity-test-logo.png"
+import Needle from "./assets/needle-icon.png"
 
 const questions = [
     "Threaded a needle",
@@ -111,26 +112,28 @@ function App() {
     const [finished, setFinished] = useState<boolean>(false)
 
     return (
-        <div className="container max-w-xl my-2 mx-auto">
-            <img src={Logo} />
-            <p className='text-center mt-5'>The Sewing Purity Test is a voluntary self-assessment created by <a className="underline text-blue-600 hover:text-blue-800" href="https://fatalfabrix.wixsite.com/fatalfabrix">Bell Hansen</a> and <a className="underline text-blue-600 hover:text-blue-800" href="https://www.medcraft.dev">Rowan Medcraft</a>. It is an opportunity to reflect on the evolution of your interactions with sewing and sewing related material</p>
-            <p className='text-center my-5 font-bold'>Caution: this is not a bucket list. Completion of all items on this test will likely result in death</p>
+        <div className="w-full h-100 absolute top-0" style={{ backgroundImage: `url(${Needle})` }}>
+            <div className="container max-w-xl my-2 mx-auto">
+                <img src={Logo} />
+                <p className='text-center mt-5'>The Sewing Purity Test is a voluntary self-assessment created by <a className="underline text-blue-600 hover:text-blue-800" href="https://fatalfabrix.wixsite.com/fatalfabrix">Bell Hansen</a> and <a className="underline text-blue-600 hover:text-blue-800" href="https://www.medcraft.dev">Rowan Medcraft</a>. It is an opportunity to reflect on the evolution of your interactions with sewing and sewing related material</p>
+                <p className='text-center my-5 font-bold'>Caution: this is not a bucket list. Completion of all items on this test will likely result in death</p>
 
-            {/* if the test is in progress */}
-            {!finished && <>
-                {questions.map((question, index) => {
-                    return <Checkbox question={question} key={index} index={index} setTotal={setTotal} />
-                })}
-                <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white" onClick={() => setFinished((finished) => !finished)}>Submit your score</button>
-            </>}
+                {/* if the test is in progress */}
+                {!finished && <>
+                    {questions.map((question, index) => {
+                        return <Checkbox question={question} key={index} index={index} setTotal={setTotal} />
+                    })}
+                    <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white" onClick={() => setFinished((finished) => !finished)}>Submit your score</button>
+                </>}
 
-            {/* if the user submitted the test */}
-            {finished &&
-                <>
-                    <h1 className="text-center text-2xl mt-5">Your final score:</h1>
-                    <h1 className="text-center text-6xl my-2">{100 - total}</h1>
-                </>
-            }
+                {/* if the user submitted the test */}
+                {finished &&
+                    <>
+                        <h1 className="text-center text-2xl mt-5">Your final score:</h1>
+                        <h1 className="text-center text-6xl my-2">{100 - total}</h1>
+                    </>
+                }
+            </div>
         </div>
     )
 }
