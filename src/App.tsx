@@ -111,9 +111,22 @@ function App() {
 
     const [finished, setFinished] = useState<boolean>(false)
 
+    // this data type doesnt matter at all. it just triggers a useEffect in each checkbox component
+
+    const [checked, setChecked] = useState<HTMLInputElement[]>([])
+
+    function clearChecks() {
+        checked.forEach((box) => {
+            box.checked = false
+        });
+        setChecked([])
+
+        setTotal(0)
+    }
+
     return (
         <div className="w-full min-h-screen absolute top-0" style={{ backgroundImage: `url(${Needle})` }}>
-            <div className="container max-w-xl my-2 mx-auto">
+            <div className="container max-w-xl m-2 mx-auto">
                 <img src={Logo} />
                 <p className='text-center mt-5'>The Sewing Purity Test is a voluntary self-assessment created by <a className="underline text-blue-600 hover:text-blue-800" href="https://fatalfabrix.wixsite.com/fatalfabrix">Bell Hansen</a> and <a className="underline text-blue-600 hover:text-blue-800" href="https://www.medcraft.dev">Rowan Medcraft</a>. It is an opportunity to reflect on the evolution of your interactions with sewing and sewing related material</p>
                 <p className='text-center my-5 font-bold'>Caution: this is not a bucket list. Completion of all items on this test will likely result in death</p>
@@ -121,9 +134,12 @@ function App() {
                 {/* if the test is in progress */}
                 {!finished && <>
                     {questions.map((question, index) => {
-                        return <Checkbox question={question} key={index} index={index} setTotal={setTotal} />
+                        return <Checkbox question={question} key={index} index={index} setTotal={setTotal} setChecked={setChecked} />
                     })}
-                    <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white" onClick={() => setFinished((finished) => !finished)}>Submit your score</button>
+                    <div className="flex flex-row gap-4">
+                        <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white" onClick={() => setFinished(true)}>Submit your score</button>
+                        <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white" onClick={clearChecks}>Clear all boxes</button>
+                    </div>
                 </>}
 
                 {/* if the user submitted the test */}
@@ -131,6 +147,12 @@ function App() {
                     <>
                         <h1 className="text-center text-2xl mt-5">Your final score:</h1>
                         <h1 className="text-center text-6xl my-2">{100 - total}</h1>
+                        <button className="mt-4 p-4 border border-black transition-colors hover:bg-black hover:text-white"
+                            onClick={() => {
+                                clearChecks()
+                                setFinished(false)
+                            }}
+                        >Take Again</button>
                     </>
                 }
             </div>
