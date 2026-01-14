@@ -112,7 +112,7 @@ function App() {
     const [finished, setFinished] = useState<boolean>(false)
 
     return (
-        <div className="w-full h-100 absolute top-0" style={{ backgroundImage: `url(${Needle})` }}>
+        <div className="w-full min-h-screen absolute top-0" style={{ backgroundImage: `url(${Needle})` }}>
             <div className="container max-w-xl my-2 mx-auto">
                 <img src={Logo} />
                 <p className='text-center mt-5'>The Sewing Purity Test is a voluntary self-assessment created by <a className="underline text-blue-600 hover:text-blue-800" href="https://fatalfabrix.wixsite.com/fatalfabrix">Bell Hansen</a> and <a className="underline text-blue-600 hover:text-blue-800" href="https://www.medcraft.dev">Rowan Medcraft</a>. It is an opportunity to reflect on the evolution of your interactions with sewing and sewing related material</p>
