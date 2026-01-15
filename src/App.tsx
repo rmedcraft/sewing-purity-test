@@ -77,7 +77,7 @@ const questions = [
     "Used an electric fabric cutter",
     "Gotten your pinking shears sharpened",
     "Done a mitered corner",
-    "Used twill tape(for non decorative purposes)  75 sewn an invisible zipper that looks invisible on your garment",
+    "Used twill tape(for non decorative purposes)",
     "Used a rotary cutter",
     "Made a shirring panel of any sort",
     "Made lingerie loops(not the ready - sew variant)",
@@ -105,6 +105,8 @@ const questions = [
     "Sewn something without pins",
     "Wear safety glasses when machine sewing",
     "Couched something",
+    // extra question:
+    // "Sewn an invisible zipper that looks invisible on your garment"
 ]
 
 function App() {

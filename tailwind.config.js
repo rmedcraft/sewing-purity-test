@@ -6,7 +6,7 @@ export default {
     ],
     theme: {
         extend: {
-            fontFamily: "serif"
+            fontFamily: { "serif": ["ui-serif"] }
         },
     },
     plugins: [],
